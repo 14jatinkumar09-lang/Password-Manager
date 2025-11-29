@@ -71,7 +71,7 @@ if(!getCookie("token")) {
     navigate('/login') ;
 }
     // console.log(document.cookie)
-})
+},[])
   return (
     <>
       <div>
