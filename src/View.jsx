@@ -21,7 +21,7 @@ const View = () => {
         }
         } 
         fetchData() ; 
-    } , [arr]) ;
+    } , []) ;
     useEffect(()=>{
     if(!localStorage.getItem("login")) {
         navigate('/login') ;
