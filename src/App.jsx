@@ -60,9 +60,18 @@ function App() {
     return password;
 
   }
-  // console.log(generate()) ;
-
-  // console.table(data)
+  useEffect(()=>{
+    const getCookie = (name) => {
+        return document.cookie
+            .split("; ")
+            .find(row => row.startsWith(name + "="))
+            ?.split("=")[1];
+    }
+if(!getCookie("token")) {
+    navigate('/login') ;
+}
+    // console.log(document.cookie)
+})
   return (
     <>
       <div>
