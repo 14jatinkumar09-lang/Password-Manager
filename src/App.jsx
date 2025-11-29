@@ -106,11 +106,11 @@ useEffect(()=>{
           setLoading(true) ;
           try {
             const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/addTodo` , {name:input , password:display.current.innerText},{ withCredentials: true })
-            toast.success(  res.data.msg ||"Password Saved") ;
+            toast.success(  res?.data?.msg ||"Password Saved") ;
             setLoading(false) ;
           } catch (error) {
             toast.dismiss() ;
-            toast.error(  error.response.data.msg ||"Password Not Saved") ;
+            toast.error(  error?.response?.data?.msg ||"Password Not Saved") ;
             console.log(error)
             setLoading(false) ;
           }
