@@ -22,6 +22,11 @@ const View = () => {
         } 
         fetchData() ; 
     } , [arr]) ;
+    useEffect(()=>{
+    if(!localStorage.getItem("login")) {
+        navigate('/login') ;
+    }
+  })
 const data = search ?[...arr].filter((i) => i.name.includes(search) ) : arr ;
   return (
     <div>

@@ -60,18 +60,11 @@ function App() {
     return password;
 
   }
-  useEffect(()=>{
-    const getCookie = (name) => {
-        return document.cookie
-            .split("; ")
-            .find(row => row.startsWith(name + "="))
-            ?.split("=")[1];
+useEffect(()=>{
+    if(!localStorage.getItem("login")) {
+        navigate('/login') ;
     }
-if(!getCookie("token")) {
-    navigate('/login') ;
-}
-    // console.log(document.cookie)
-},[])
+  })
   return (
     <>
       <div>
@@ -136,6 +129,7 @@ if(!getCookie("token")) {
 
         <button onClick={()=>{
           document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          localStorage.removeItem("login");
           navigate('/login') ;
           alert("Logout Successfull")
         }}

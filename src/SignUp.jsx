@@ -43,13 +43,11 @@ export function Signup() {
         try {
                     setBtnLoad(true) ;
                     const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/register`, UserData,{ withCredentials: true })
-                    
+                    localStorage.setItem("login" , true) ;
                     toast.dismiss() ;
                             toast.success(res.data.responseData.message);
                             navigate("/") ;
                             setBtnLoad(false) ;
-                        
-                    
                 } 
                 
                 catch (error) {
@@ -64,18 +62,11 @@ export function Signup() {
 
 
             }
-useEffect(()=>{
-    const getCookie = (name) => {
-        return document.cookie
-            .split("; ")
-            .find(row => row.startsWith(name + "="))
-            ?.split("=")[1];
+             useEffect(()=>{
+    if(localStorage.getItem("login")) {
+        navigate('/') ;
     }
-if(getCookie("token")) {
-    navigate('/') ;
-}
-    // console.log(document.cookie)
-})
+  })
 
 
     return (
