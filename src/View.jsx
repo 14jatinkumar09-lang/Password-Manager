@@ -36,6 +36,7 @@ const data = search ?[...arr].filter((i) => i.name.includes(search) ) : arr ;
             type='text' placeholder='search . . .' value={search} />
         </div>
         {data.map((items , index)=>{
+            // console.log(items) ;
             return <div key={items.password}>
                 <h4>{index+1}. {items.name}</h4>
                 <div className='password'>
@@ -57,10 +58,10 @@ const data = search ?[...arr].filter((i) => i.name.includes(search) ) : arr ;
                 onClick={async()=>{
                     
                     try {
-            const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/deleteTodo`, {_id : items._id} ,{ withCredentials: true }) ;
-            
+            const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/deleteTodo`, {id : items._id} ,{ withCredentials: true }) ;
+            fetchData();
             toast.success("deleted") ;
-            fetchData() ;
+            // fetchData() ;
         } catch (error) {
             console.log(error) ;
             toast.error("failed") ;
