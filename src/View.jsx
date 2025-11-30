@@ -9,8 +9,7 @@ const View = () => {
     const [search , setSearch] = useState("") ;
     const [visible , setVisible] = useState(false) ;
     const [arr,setArr] = useState([]) ; 
-    useEffect(()=>{
-        async function fetchData() {
+    async function fetchData() {
             try {
             const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/`, { withCredentials: true }) ;
             setArr(res.data.todos)
@@ -20,6 +19,8 @@ const View = () => {
             toast.error("Fetching Failed Reload") ;
         }
         } 
+    useEffect(()=>{
+        
         fetchData() ; 
     } , []) ;
     useEffect(()=>{
@@ -46,12 +47,29 @@ const data = search ?[...arr].filter((i) => i.name.includes(search) ) : arr ;
                     }}><BiSolidHide /></div>
                     
                 </div><br />
-                <button style={{backgroundColor:"green" , color:"black"}}
+                <button style={{backgroundColor:"green" , color:"black" , marginRight:"5px"}}
                 onClick={async()=>{
                     await navigator.clipboard.writeText(input.current[index].defaultValue) ;
                     toast.success("copied") ;
                 }}
-                >copy</button><Toaster/>
+                >copy</button>
+                <button style={{backgroundColor:"green" , color:"black"}}
+                onClick={async()=>{
+                    
+                    try {
+            const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/deleteTodo`, {_id : items._id} ,{ withCredentials: true }) ;
+            
+            toast.success("deleted") ;
+            fetchData() ;
+        } catch (error) {
+            console.log(error) ;
+            toast.error("failed") ;
+        }
+
+
+                }}
+                >Delete</button>
+                <Toaster/>
                 </div> 
         })}
       
