@@ -62,9 +62,7 @@ function App() {
   }
 useEffect(()=>{
 
-  if(document.cookie.split(";").some(item => item.trim().startsWith("token="))) {
-    localStorage.setItem("login" , true) ;
-  }
+  
 
     if(!localStorage.getItem("login")) {
         navigate('/login') ;
