@@ -61,13 +61,25 @@ function App() {
 
   }
 useEffect(()=>{
-
+  const checkLogin = async() => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/authenticate` , { withCredentials: true })
+      
+        localStorage.setItem("login" , "true") ;
+      
+    } catch (error) {
+      localStorage.removeItem("login") ;
+      navigate('/login') ;
+      console.log(error) ;
+    }
+  }
+  checkLogin() ;
   
 
     if(!localStorage.getItem("login")) {
         navigate('/login') ;
     }
-  })
+  },[])
   return (
     <>
       <div>
@@ -130,11 +142,20 @@ useEffect(()=>{
         }}>view all saved passwords . . .</div>
         <br/><br/><br/><br/><br/><br/>
 
-        <button onClick={()=>{
-          document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-          localStorage.removeItem("login");
-          navigate('/login') ;
-          alert("Logout Successfull")
+        <button onClick={async()=>{
+          try {
+            const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/logout` , { withCredentials: true })
+            toast.success(  res?.data?.msg ||"Logout Successfull") ;
+            setLoading(false) ;
+            localStorage.removeItem("login");
+            navigate('/login') ;
+          } catch (error) {
+            toast.dismiss() ;
+            toast.error(  error?.response?.data?.msg ||"Logout Not Successfull") ;
+            console.log(error)
+            setLoading(false) ;
+          }
+          // alert("Logout Successfull")
         }}
         style={{
          background: "#d32f2f",
