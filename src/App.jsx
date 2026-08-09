@@ -137,13 +137,13 @@ useEffect(()=>{
         }} >Save Password</button>}
         <br /><br />
 
-        <div onClick={()=>{
+        <button onClick={()=>{
           navigate('/viewPassword' , {
             state : {
               arr : arr
             }
           }) ;
-        }}>view all saved passwords . . .</div>
+        }}>view all saved passwords . . .</button>
         <br/><br/><br/><br/><br/><br/>
 
         <button onClick={async()=>{
