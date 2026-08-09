@@ -44,7 +44,7 @@ function App() {
   const generate = () => {
     // btn.current.style.color = "white"
     let alpha = "abcdefghijklmnopqrstuvwxyz".split("");
-
+    let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     if (data.number === true) {
       alpha = [...alpha, ..."123456789".split("")]
     }
@@ -54,7 +54,13 @@ function App() {
 
     let password = "";
     for (let i = 0; i <= data.range; i++) {
+       if(i%2 === 0) {
       password = password + alpha[Math.floor(Math.random() * alpha.length)]
+          
+       }
+       else {
+          password = password + upper[Math.floor(Math.random() * alpha.length)]
+       }
     }
 
     return password;
