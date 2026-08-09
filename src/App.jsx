@@ -49,18 +49,16 @@ function App() {
       alpha = [...alpha, ..."123456789".split("")]
     }
     if (data.character === true) {
-      alpha = [...alpha, ..."!@#$%^&*().,_?/<>-_=+".split("")]
+      alpha = [...alpha , ...upper, ..."!@#$%^&*().,_?/<>-_=+".split("")]
     }
 
     let password = "";
     for (let i = 0; i <= data.range; i++) {
-       if(i%2 === 0) {
+      
       password = password + alpha[Math.floor(Math.random() * alpha.length)]
           
-       }
-       else {
-          password = password + upper[Math.floor(Math.random() * alpha.length)]
-       }
+       
+       
     }
 
     return password;
